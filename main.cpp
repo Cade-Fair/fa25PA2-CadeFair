@@ -94,7 +94,7 @@ int buildEncodingTree(int nextFree) {
     MinHeap h;
     // 2. Push all leaf node indices into the heap.
     for ( int i = 0; i < nextFree; ++i) {
-        h.push(i, weightArr)
+        h.push(i, weightArr);
     }
     // Empty
     if (h.size == 0) return -1;
@@ -134,6 +134,48 @@ void generateCodes(int root, string codes[]) {
     // Use stack<pair<int, string>> to simulate DFS traversal.
     // Left edge adds '0', right edge adds '1'.
     // Record code when a leaf node is reached.
+    for (int i = 0; i < 26; i++) {
+        codes[i].clear();
+    }
+
+    if (root < 0) return; //Nothing to do
+
+    //Single Node tree: will assign 0 to the only symbol
+    if (leftArr[root] == -1 && rightArr[root] == -1) {
+        if (charArr[root] >= 'a' && charArr[root] <= 'z') {
+            codes[charArr[root] - 'a'] = "0";
+        }
+        return;
+    }
+
+    struct Item { int node; string path; };
+    stack<Item> st;
+    st.push({root, ""});
+
+    while (!st.empty()) {
+        Item it = st.top(); st.pop();
+        int node = it.node;
+        int L = leftArr[node];
+        int R = rightArr[node];
+
+        // Leaf and record the path
+        if (L == -1 && R == -1){
+            char c = charArr[node];
+            if (c >= 'a' && c <= 'z') {
+                // If path empty
+                codes[c - 'a'] = it.path.empty() ? string("0") : it.path;
+            }
+        } else {
+            // Push right first so left is processed first
+            if (R != -1) {
+                st.push({R, it.path + "1"});
+            }
+
+            if (L != -1) {
+                st.push({L, it.path + "0"});
+            }
+        }
+    }
 }
 
 // Step 5: Print table and encoded message
