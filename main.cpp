@@ -64,6 +64,7 @@ int main() {
   ------------------------------------------------------*/
 
 // Step 1: Read file and count frequencies
+// Pur
 void buildFrequencyTable(int freq[], const string& filename) {
     ifstream file(filename);
     if (!file.is_open()) {
@@ -103,8 +104,9 @@ int createLeafNodes(int freq[]) {
 }
 
 // Step 3: Build the encoding tree using heap operations
+// Purpose: This will combine the lowest-frequency nodes from the heap
+//          to construct the variable-bit encoding tree.
 int buildEncodingTree(int nextFree) {
-    // TODO:
     // 1. Create a MinHeap object.
     MinHeap h;
     // 2. Push all leaf node indices into the heap.
@@ -144,6 +146,7 @@ int buildEncodingTree(int nextFree) {
 }
 
 // Step 4: Use an STL stack to generate codes
+// Purpose: Will traverse the tree and assign codes to each leaf character.
 void generateCodes(int root, string codes[]) {
 
     for (int i = 0; i < 26; i++) {
