@@ -1,6 +1,21 @@
 //
 // Created by Manju Muralidharan on 10/19/25.
 //
+
+/*
+ * Author: Cade Fair
+ * Course: CS 240
+ * Assignment: PA2
+ * Date: November 3, 2025
+ *
+ * Description:
+ * This program reads a text file (input.txt), analyzes character frequencies,
+ * builds a min-heap to combine symbols, constructs a variable-length
+ * encoding tree, and prints both the encoding table and the encoded message.
+ *
+ * Frequent letters get shorter bit codes to reduce total size.
+ * Implements an array-based heap and an iterative traversal using std::stack.
+ */
 #include <iostream>
 #include <fstream>
 #include <stack>
@@ -130,10 +145,7 @@ int buildEncodingTree(int nextFree) {
 
 // Step 4: Use an STL stack to generate codes
 void generateCodes(int root, string codes[]) {
-    // TODO:
-    // Use stack<pair<int, string>> to simulate DFS traversal.
-    // Left edge adds '0', right edge adds '1'.
-    // Record code when a leaf node is reached.
+
     for (int i = 0; i < 26; i++) {
         codes[i].clear();
     }
