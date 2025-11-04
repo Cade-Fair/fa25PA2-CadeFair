@@ -10,7 +10,7 @@
  *
  * Description:
  * This program reads a text file (input.txt), analyzes character frequencies,
- * builds a min-heap to combine symbols, constructs a variable-length
+ * builds a min-heap to combine symbols, constructs an
  * encoding tree, and prints both the encoding table and the encoded message.
  *
  * Frequent letters get shorter bit codes to reduce total size.
@@ -64,7 +64,7 @@ int main() {
   ------------------------------------------------------*/
 
 // Step 1: Read file and count frequencies
-// Pur
+
 void buildFrequencyTable(int freq[], const string& filename) {
     ifstream file(filename);
     if (!file.is_open()) {
